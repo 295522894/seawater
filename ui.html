@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海缸助手 - 专业海缸管理工具</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+        }
+        .gradient-primary {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        }
+        .gradient-secondary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .gradient-warning {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .gradient-danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+        .chart-placeholder {
+            background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .chart-placeholder::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.5) 50%, 
+                rgba(255,255,255,0) 100%);
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-md mx-auto bg-white min-h-screen relative overflow-hidden">
+        <!-- 顶部导航栏 -->
+        <header class="sticky top-0 z-50 gradient-primary text-white p-4 flex justify-between items-center shadow-md">
+            <div class="flex items-center">
+                <h1 class="text-xl font-bold">海缸助手</h1>
+                <span class="ml-2 text-xs bg-white bg-opacity-20 px-2 py-0.5 rounded-full">专业版</span>
+            </div>
+            <div class="flex space-x-3">
+                <span class="material-icons-round text-white text-opacity-90 hover:text-opacity-100 cursor-pointer">notifications_none</span>
+                <span class="material-icons-round text-white text-opacity-90 hover:text-opacity-100 cursor-pointer">settings</span>
+            </div>
+        </header>
+
+        <!-- 页面内容区域 -->
+        <div class="p-5">
+            <!-- 海缸概览卡片 -->
+            <div class="bg-white rounded-2xl card-shadow overflow-hidden mb-6 hover-scale transition-all border border-gray-100">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1520302519239-d96ebf09b0c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="海缸照片" class="w-full h-48 object-cover">
+                    <div class="absolute top-3 right-3 glass-effect rounded-full px-3 py-1 text-xs font-medium text-blue-800">
+                        <div class="flex items-center">
+                            <span class="w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse-slow"></span>
+                            实时监测中
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-lg font-bold text-gray-800">珊瑚礁缸</h3>
+                        <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-medium">状态良好</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-4 flex items-center">
+                        <span class="material-icons-round text-gray-400 text-sm mr-1">calendar_today</span>
+                        创建于 2023-05-15 · 90L
+                    </p>
+                    
+                    <!-- 关键参数 -->
+                    <div class="grid grid-cols-3 gap-3 mb-5">
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-xl text-center">
+                            <p class="text-xs text-gray-500 mb-1">温度</p>
+                            <p class="text-lg font-bold text-blue-600">25.5°C</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-xl text-center">
+                            <p class="text-xs text-gray-500 mb-1">pH值</p>
+                            <p class="text-lg font-bold text-blue-600">8.2</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-xl text-center">
+                            <p class="text-xs text-gray-500 mb-1">盐度</p>
+                            <p class="text-lg font-bold text-blue-600">1.025</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 快捷操作 -->
+                    <div class="flex justify-between">
+                        <button class="gradient-primary text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm flex items-center">
+                            <span class="material-icons-round mr-1 text-sm">visibility</span>
+                            查看详情
+                        </button>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm flex items-center hover:bg-gray-200 transition-all">
+                            <span class="material-icons-round mr-1 text-sm">edit</span>
+                            记录参数
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 参数趋势图 -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-lg font-bold text-gray-800">参数趋势</h3>
+                    <select class="text-sm bg-gray-100 rounded-lg px-2 py-1 border-none focus:ring-2 focus:ring-blue-500">
+                        <option>最近7天</option>
+                        <option>最近30天</option>
+                        <option>最近3个月</option>
+                    </select>
+                </div>
+                <div class="bg-white rounded-xl card-shadow overflow-hidden border border-gray-100">
+                    <div class="flex space-x-1 p-3 bg-gray-50 border-b border-gray-100">
+                        <button class="bg-blue-500 text-white px-3 py-1 rounded-lg text-xs">温度</button>
+                        <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-xs">pH值</button>
+                        <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-xs">盐度</button>
+                        <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-xs">氨氮</button>
+                    </div>
+                    <div class="p-4">
+                        <div class="h-40 chart-placeholder rounded-lg flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="w-10 h-10 gradient-primary rounded-full mx-auto mb-2 flex items-center justify-center">
+                                    <span class="material-icons-round text-white">show_chart</span>
+                                </div>
+                                <p class="text-sm text-gray-500">温度趋势图</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between mt-3 text-xs text-gray-500">
+                            <span>10-09</span>
+                            <span>10-11</span>
+                            <span>10-13</span>
+                            <span>10-15</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 今日任务 -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-lg font-bold text-gray-800">今日任务</h3>
+                    <button class="text-blue-500 text-sm font-medium flex items-center">
+                        <span class="material-icons-round text-sm mr-1">add</span>
+                        添加任务
+                    </button>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-white rounded-xl card-shadow p-4 border border-gray-100">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 gradient-warning rounded-full flex items-center justify-center mr-3">
+                                <span class="material-icons-round text-white">restaurant</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-medium text-gray-800">喂食珊瑚</h3>
+                                <p class="text-xs text-gray-500 flex items-center mt-0.5">
+                                    <span class="material-icons-round text-gray-400 text-sm mr-1">schedule</span>
+                                    今天 19:00
+                                </p>
+                            </div>
+                            <div>
+                                <button class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-green-500 transition-all"></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl card-shadow p-4 border border-gray-100">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 gradient-primary rounded-full flex items-center justify-center mr-3">
+                                <span class="material-icons-round text-white">water_drop</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-medium text-gray-800">换水</h3>
+                                <p class="text-xs text-gray-500 flex items-center mt-0.5">
+                                    <span class="material-icons-round text-gray-400 text-sm mr-1">schedule</span>
+                                    今天 10:00
+                                </p>
+                            </div>
+                            <div>
+                                <button class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-green-500 transition-all"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 工具箱 -->
+            <div class="mb-6">
+                <h3 class="text-lg font-bold mb-3 text-gray-800">工具箱</h3>
+                <div class="grid grid-cols-4 gap-3">
+                    <div class="flex flex-col items-center hover-scale transition-all cursor-pointer">
+                        <div class="w-14 h-14 gradient-primary rounded-xl flex items-center justify-center mb-2 shadow-sm">
+                            <span class="material-icons-round text-white">analytics</span>
+                        </div>
+                        <p class="text-xs font-medium text-center text-gray-700">参数记录</p>
+                    </div>
+                    <div class="flex flex-col items-center hover-scale transition-all cursor-pointer">
+                        <div class="w-14 h-14 gradient-secondary rounded-xl flex items-center justify-center mb-2 shadow-sm">
+                            <span class="material-icons-round text-white">pets</span>
+                        </div>
+                        <p class="text-xs font-medium text-center text-gray-700">生物管理</p>
+                    </div>
+                    <div class="flex flex-col items-center hover-scale transition-all cursor-pointer">
+                        <div class="w-14 h-14 gradient-warning rounded-xl flex items-center justify-center mb-2 shadow-sm">
+                            <span class="material-icons-round text-white">alarm</span>
+                        </div>
+                        <p class="text-xs font-medium text-center text-gray-700">维护提醒</p>
+                    </div>
+                    <div class="flex flex-col items-center hover-scale transition-all cursor-pointer">
+                        <div class="w-14 h-14 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-xl flex items-center justify-center mb-2 shadow-sm">
+                            <span class="material-icons-round text-white">calculate</span>
+                        </div>
+                        <p class="text-xs font-medium text-center text-gray-700">计算工具</p>
+                    </div>
+                    <div class="flex flex-col items-center hover-scale transition-all cursor-pointer">
+                        <div class="w-14 h-14 bg-gradient-to-br from-cyan-400 to-sky-500 rounded-xl flex items-center justify-center mb-2 shadow-sm">
+                            <span class="material-icons-round text-white">science</span>
+                        </div>
+                        <p class="text-xs font-medium text-center text-gray-700">水质检测</p>
+                    </div>
+                    <div class="flex flex-col items-center hover-scale transition-all cursor-pointer">
+                        <div class="w-14 h-14 bg-gradient-to-br from-emerald-400 to-green-500 rounded-xl flex items-center justify-center mb-2 shadow-sm">
+                            <span class="material-icons-round text-white">inventory</span>
+                        </div>
+                        <p class="text-xs font-medium text-center text-gray-700">设备管理</p>
+                    </div>
+                    <div class="flex flex-col items-center hover-scale transition-all cursor-pointer">
+                        <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center mb-2 shadow-sm">
+                            <span class="material-icons-round text-white">menu_book</span>
+                        </div>
+                        <p class="text-xs font-medium text-center text-gray-700">知识库</p>
+                    </div>
+                    <div class="flex flex-col items-center hover-scale transition-all cursor-pointer">
+                        <div class="w-14 h-14 bg-gradient-to-br from-gray-400 to-gray-500 rounded-xl flex items-center justify-center mb-2 shadow-sm">
+                            <span class="material-icons-round text-white">more_horiz</span>
+                        </div>
+                        <p class="text-xs font-medium text-center text-gray-700">更多工具</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 异常警报 -->
+            <div class="mb-6">
+                <h3 class="text-lg font-bold mb-3 text-gray-800">异常警报</h3>
+                <div class="bg-white rounded-xl card-shadow overflow-hidden border border-gray-100">
+                    <div class="p-4 border-b border-gray-100 flex items-center">
+                        <div class="w-10 h-10 gradient-danger rounded-full flex items-center justify-center mr-3">
+                            <span class="material-icons-round text-white">warning</span>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-800">硝酸盐偏高</h3>
+                            <p class="text-xs text-gray-500">检测时间: 今天 08:30</p>
+                        </div>
+                        <div class="ml-auto">
+                            <span class="text-red-500 font-bold">25 ppm</span>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-gray-50">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">建议措施:</h4>
+                        <ul class="text-xs text-gray-600 space-y-1">
+                            <li class="flex items-start">
+                                <span class="material-icons-round text-green-500 text-sm mr-1">check_circle</span>
+                                增加换水频率，建议每周换水30%
+                            </li>
+                            <li class="flex items-start">
+                                <span class="material-icons-round text-green-500 text-sm mr-1">check_circle</span>
+                                检查过滤系统，确保正常运行
+                            </li>
+                            <li class="flex items-start">
+                                <span class="material-icons-round text-green-500 text-sm mr-1">check_circle</span>
+                                减少喂食量，避免残饵污染水质
+                            </li>
+                        </ul>
+                        <button class="w-full mt-3 bg-red-500 text-white py-2 rounded-lg text-sm font-medium">查看详细解决方案</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 flex justify-around py-3 max-w-md mx-auto shadow-lg glass-effect">
+            <a href="#" class="flex flex-col items-center text-blue-500">
+                <span class="material-icons-round">dashboard</span>
+                <span class="text-xs mt-1 font-medium">概览</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-400 hover:text-blue-500 transition-all">
+                <span class="material-icons-round">analytics</span>
+                <span class="text-xs mt-1 font-medium">参数</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-400 hover:text-blue-500 transition-all">
+                <span class="material-icons-round">pets</span>
+                <span class="text-xs mt-1 font-medium">生物</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-400 hover:text-blue-500 transition-all">
+                <span class="material-icons-round">build</span>
+                <span class="text-xs mt-1 font-medium">工具</span>
+            </a>
+        </nav>
+    </div>
+</body>
+</html>
